@@ -10,6 +10,7 @@ using System.Net.Http;
 using System.Net.Mail;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using System.Web.Http.Description;
 using System.Web.UI.WebControls;
 using API.Models;
@@ -17,6 +18,7 @@ using Microsoft.AspNet.Identity;
 
 namespace API.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     [Authorize]
     public class ValidCodesController : ApiController
     {

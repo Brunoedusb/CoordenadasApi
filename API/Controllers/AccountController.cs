@@ -16,9 +16,11 @@ using Microsoft.Owin.Security.OAuth;
 using API.Models;
 using API.Providers;
 using API.Results;
+using System.Web.Http.Cors;
 
 namespace API.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     [Authorize]
     [RoutePrefix("api/Account")]
     public class AccountController : ApiController
