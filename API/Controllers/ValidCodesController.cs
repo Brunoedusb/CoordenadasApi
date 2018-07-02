@@ -19,7 +19,6 @@ using Microsoft.AspNet.Identity;
 namespace API.Controllers
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
-    [Authorize]
     public class ValidCodesController : ApiController
     {
         private ValidCodeContext db = new ValidCodeContext();
@@ -50,9 +49,8 @@ namespace API.Controllers
         {
             try
             {
-                String id = User.Identity.GetUserId();
                 ValidCode validCode = await db.ValidCodes
-                                            .Where(x => x.Code == Code.Code && x.UserId == id)
+                                            .Where(x => x.Code == Code.Code)
                                             .FirstOrDefaultAsync();
 
                 if (validCode == null)

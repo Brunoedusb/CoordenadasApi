@@ -94,6 +94,7 @@ namespace API.Controllers
         }
 
         // DELETE: api/AddressModels/5
+        [HttpPost]
         [ResponseType(typeof(AddressModels))]
         public async Task<IHttpActionResult> DeleteAddressModels(int id)
         {
