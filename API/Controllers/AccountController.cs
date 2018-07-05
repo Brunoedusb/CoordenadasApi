@@ -118,15 +118,15 @@ namespace API.Controllers
 
         // POST api/Account/ChangePassword
         [Route("ChangePassword")]
+        [AllowAnonymous]
         public async Task<IHttpActionResult> ChangePassword(ChangePasswordBindingModel model)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-
-            IdentityResult result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword,
-                model.NewPassword);
+            string resetToken = await UserManager.GeneratePasswordResetTokenAsync(UserManager.FindByEmail(model.Email).Id);
+            IdentityResult result = await UserManager.ResetPasswordAsync(UserManager.FindByEmail(model.Email).Id, resetToken, model.NewPassword);
             
             if (!result.Succeeded)
             {

@@ -15,13 +15,12 @@ namespace API.Models
 
     public class ChangePasswordBindingModel
     {
-        [Required]
-        [DataType(DataType.Password)]
-        [Display(Name = "Senha atual")]
-        public string OldPassword { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "O {0} deve ter pelo menos {2} caracteres.", MinimumLength = 6)]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+
+        [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Nova senha")]
         public string NewPassword { get; set; }

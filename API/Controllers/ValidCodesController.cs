@@ -22,6 +22,7 @@ namespace API.Controllers
     public class ValidCodesController : ApiController
     {
         private ValidCodeContext db = new ValidCodeContext();
+        private ApplicationDbContext userCtx = new ApplicationDbContext();
 
         // GET: api/ValidCodes
         public IQueryable<ValidCode> GetValidCodes()
@@ -116,7 +117,8 @@ namespace API.Controllers
             {
 
                 validCode.Code = RandomString(6);
-                validCode.UserId = User.Identity.GetUserId();
+                var user = userCtx.Users.First(x => x.Email == Email.Email);
+                validCode.UserId = user.Id;
 
                 db.ValidCodes.Add(validCode);
                 await db.SaveChangesAsync();
